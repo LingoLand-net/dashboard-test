@@ -1,7 +1,12 @@
-// Centralized configuration used by frontend services
-// This is the deployed Apps Script Web App URL
-export const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxJQtUo31PGE_q5Y1FaTwaSJmjenMn70VGedz-UJLS3XOhNYZmOUjUOKW3yhOOLbtVt/exec';
+// Centralized configuration for frontend services
+// Supabase configuration - add your project credentials here
+
+// Supabase Project Settings
+// Get these from https://app.supabase.com -> Project Settings -> API
+export const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://your-project.supabase.co';
+export const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'your-anon-key-here';
 
 export const ENV = {
   production: false,
+  supabaseEnabled: true
 };
