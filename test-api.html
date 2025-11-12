@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lingoville API Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 2rem;
+            background: #f5f5f5;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 20px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px 5px 5px 0;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .success { 
+            color: #28a745;
+            font-weight: bold;
+        }
+        .error { 
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .loading {
+            color: #ffc107;
+            font-weight: bold;
+        }
+        pre { 
+            background: #f0f0f0; 
+            padding: 1rem; 
+            border-radius: 4px; 
+            overflow-x: auto;
+            border-left: 4px solid #007bff;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Lingoville Dashboard - API Test</h1>
+        
+        <div class="test-section">
+            <h2>Endpoints to Test</h2>
+            <button onclick="testStudents()">Test Students</button>
+            <button onclick="testGroups()">Test Groups</button>
+            <button onclick="testPayments()">Test Payments</button>
+            <button onclick="testAttendance()">Test Attendance</button>
+            <button onclick="testContacts()">Test Contacts</button>
+            <button onclick="testEvents()">Test Events</button>
+            <button onclick="testAll()">Test All</button>
+            <button onclick="clearResults()">Clear</button>
+        </div>
+
+        <h2>Results:</h2>
+        <div id="results"></div>
+    </div>
+    
+    <script type="module">
+        import api from './services/api.js';
+        
+        const resultsDiv = document.getElementById('results');
+        
+        async function testEndpoint(name, resource, action) {
+            try {
+                resultsDiv.innerHTML += `<p class="loading">⏳ Testing ${name}...</p>`;
+                
+                const response = await api.request(`?resource=${resource}&action=${action}`, { 
+                    method: 'GET' 
+                });
+                
+                if (response.ok && response.data) {
+                    const count = Array.isArray(response.data) ? response.data.length : 1;
+                    resultsDiv.innerHTML += `<p class="success">✅ ${name}: ${count} records found</p>`;
+                    resultsDiv.innerHTML += '<pre>' + JSON.stringify(response.data.slice(0, 2), null, 2) + '</pre>';
+                } else if (response.ok) {
+                    resultsDiv.innerHTML += `<p class="success">✅ ${name}: Success</p>`;
+                } else {
+                    resultsDiv.innerHTML += `<p class="error">❌ ${name}: ${response.error || 'Unknown error'}</p>`;
+                }
+            } catch (err) {
+                resultsDiv.innerHTML += `<p class="error">❌ ${name} failed: ${err.message}</p>`;
+            }
+        }
+        
+        window.testStudents = () => testEndpoint('Students', 'students', 'list');
+        window.testGroups = () => testEndpoint('Groups', 'groups', 'list');
+        window.testPayments = () => testEndpoint('Payments', 'payments', 'list');
+        window.testAttendance = () => testEndpoint('Attendance', 'attendance', 'list');
+        window.testContacts = () => testEndpoint('Contacts', 'contacts', 'list');
+        window.testEvents = () => testEndpoint('Events', 'events', 'list');
+        
+        window.clearResults = () => {
+            resultsDiv.innerHTML = '';
+        };
+        
+        window.testAll = async () => {
+            clearResults();
+            resultsDiv.innerHTML += '<p><strong>Running all tests...</strong></p>';
+            await testEndpoint('Students', 'students', 'list');
+            await new Promise(r => setTimeout(r, 500));
+            await testEndpoint('Groups', 'groups', 'list');
+            await new Promise(r => setTimeout(r, 500));
+            await testEndpoint('Payments', 'payments', 'list');
+            await new Promise(r => setTimeout(r, 500));
+            await testEndpoint('Attendance', 'attendance', 'list');
+            await new Promise(r => setTimeout(r, 500));
+            await testEndpoint('Contacts', 'contacts', 'list');
+            await new Promise(r => setTimeout(r, 500));
+            await testEndpoint('Events', 'events', 'list');
+            resultsDiv.innerHTML += '<p><strong>✅ All tests complete!</strong></p>';
+        };
+    </script>
+</body>
+</html>

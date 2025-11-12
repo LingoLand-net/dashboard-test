@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lingoville Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app" class="app-layout">
+    <!-- Mobile Menu Toggle -->
+    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="sidebar-title">Lingoville</h1>
+        <p class="sidebar-subtitle">Dashboard</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" data-nav="students" class="nav-link active">
+          <span class="nav-icon">👥</span>
+          <span class="nav-text">Students</span>
+        </a>
+        <a href="#" data-nav="payments" class="nav-link">
+          <span class="nav-icon">💰</span>
+          <span class="nav-text">Payments</span>
+        </a>
+        <a href="#" data-nav="contacts" class="nav-link">
+          <span class="nav-icon">📞</span>
+          <span class="nav-text">Contacts</span>
+        </a>
+        <a href="#" data-nav="events" class="nav-link">
+          <span class="nav-icon">📅</span>
+          <span class="nav-text">Events</span>
+        </a>
+        <a href="#" data-nav="attendance" class="nav-link">
+          <span class="nav-icon">✓</span>
+          <span class="nav-text">Attendance</span>
+        </a>
+        <a href="#" data-nav="groups" class="nav-link">
+          <span class="nav-icon">🎓</span>
+          <span class="nav-text">Groups</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="logout-btn" data-action="logout" class="btn btn-danger btn-full">
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Header -->
+      <header id="header" class="header">
+        <div class="header-left">
+          <h2 id="page-title" class="page-title">Students</h2>
+        </div>
+        <div class="header-right">
+          <button id="add-btn" class="btn btn-primary">
+            + Add New
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="page-content">
+        <!-- Students Page -->
+        <div id="students-list" class="page-container">
+          <div id="students-content" class="content-wrapper"></div>
+        </div>
+
+        <!-- Payments Page -->
+        <div id="payments-list" class="page-container hidden">
+          <div id="payments-content" class="content-wrapper"></div>
+        </div>
+
+        <!-- Contacts Page -->
+        <div id="contacts-list" class="page-container hidden">
+          <div id="contacts-content" class="content-wrapper"></div>
+        </div>
+
+        <!-- Events Page -->
+        <div id="events-list" class="page-container hidden">
+          <div id="events-content" class="content-wrapper"></div>
+        </div>
+
+        <!-- Attendance Page -->
+        <div id="attendance-list" class="page-container hidden">
+          <div id="attendance-content" class="content-wrapper"></div>
+        </div>
+
+        <!-- Groups Page -->
+        <div id="groups-list" class="page-container hidden">
+          <div id="groups-content" class="content-wrapper"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Global Modal for Create/Edit -->
+  <div id="form-modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title" class="modal-title">Add New</h3>
+        <button data-modal-close="form-modal" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-container" class="form">
+          <!-- Form fields populated by page-specific logic -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-modal-close="form-modal" class="btn btn-secondary">
+          Cancel
+        </button>
+        <button type="submit" form="form-container" class="btn btn-primary">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="main.js"></script>
+</body>
+</html>
