@@ -20,8 +20,8 @@ This dashboard has been completely migrated from Google Apps Script + Google She
 2. Click "New Project"
 3. Fill in project details:
    - Name: "Lingoville Dashboard"
-   - Database Password: (create strong password, save it!)
-   - Region: Choose closest to you
+   - Database Password: suggest.strongerPASSWORD88
+   - Region: Europe
 4. Wait for project to initialize (2-5 minutes)
 
 ### 2. Run the SQL Schema
@@ -36,8 +36,8 @@ This dashboard has been completely migrated from Google Apps Script + Google She
 1. Go to **Project Settings** (⚙️ icon, bottom left)
 2. Click **API**
 3. Copy these values:
-   - **Project URL** → `SUPABASE_URL`
-   - **anon public** key → `SUPABASE_ANON_KEY`
+   - **Project URL** → `https://ntoywdjhihbzuatybafv.supabase.co`
+   - **anon public** key → `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im50b3l3ZGpoaWhienVhdHliYWZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI5MzM1NzEsImV4cCI6MjA3ODUwOTU3MX0.J7rG5nOJigfhpqQZZXNbKkhfcrNkNewwqA3cTAlPNpQ`
 
 ### 4. Update Environment Variables
 Create a `.env.local` file in the root directory:
